@@ -4,7 +4,7 @@ import { useState, useContext, createContext, useEffect } from "react";
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = "http://localhost:3000/movies";
   const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {
@@ -14,7 +14,7 @@ const GlobalProvider = ({ children }) => {
         setMovies(res.data);
       })
       .catch((error) => {
-        console.error("Errore nel fetch dei dati", error);
+        console.log("Errore nel fetch dei dati", error);
       });
   };
 

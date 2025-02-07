@@ -4,14 +4,14 @@ import { useState, useContext, createContext, useEffect } from "react";
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = "http://localhost:3001";
   const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {
     axios
       .get(apiUrl)
       .then((res) => {
-        console.log(res.data);
+        setMovies(res.data);
       })
       .catch((error) => {
         console.error("Errore nel fetch dei dati", error);

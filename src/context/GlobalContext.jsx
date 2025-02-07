@@ -1,18 +1,29 @@
 import axios from "axios";
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const apiUrl = "http://localhost:3000";
+  const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {
-    axios.get(apiurl).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .get(apiUrl)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Errore nel fetch dei dati", error);
+      });
   };
 
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
   const value = {
+    movies,
     fetchMovies,
   };
 

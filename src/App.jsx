@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Bootstrap from "./Bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return <>APP</>;

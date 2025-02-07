@@ -8,7 +8,7 @@ const MovieDetailPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/movies/${id}`)
+      .get(`http://localhost:3000/movies/${id}`)
       .then((res) => {
         setMovie(res.data);
       })
@@ -24,7 +24,13 @@ const MovieDetailPage = () => {
   return (
     <div>
       <h1>{movie.title}</h1>
-      <img src={movie.image} alt={movie.title} />
+      <div className="container">
+        <img
+          src={movie.image}
+          alt={movie.title}
+          className="img-fluid imgcont"
+        />
+      </div>
       <p>{movie.description}</p>
       <h3>Recensioni:</h3>
       {movie.reviews && movie.reviews.length > 0 ? (

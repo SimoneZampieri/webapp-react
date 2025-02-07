@@ -4,7 +4,7 @@ import { useState, useContext, createContext, useEffect } from "react";
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3001";
+  const apiUrl = "http://localhost:3000";
   const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {

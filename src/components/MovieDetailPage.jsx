@@ -2,6 +2,8 @@ import { useState, useEffect, use } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
+import { Link } from "react-router-dom";
+import Home from "./Home";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -45,6 +47,9 @@ const MovieDetailPage = () => {
       ) : (
         <p>Nessuna recensione disponibile</p>
       )}
+      <Link href="/movies">
+        <button className="btn btn-success">Torna ai Film</button>
+      </Link>
     </div>
   );
 };

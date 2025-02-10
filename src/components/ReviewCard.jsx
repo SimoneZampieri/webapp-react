@@ -5,10 +5,10 @@ const ReviewCard = ({ review }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container review my-3">
         <div className="review-box">
           <div className="user d-flex justify-content-between">
-            <address>{name}</address>
+            <h4>{name}</h4>
             <div className="vote">
               <StarsRating vote={vote} />
             </div>

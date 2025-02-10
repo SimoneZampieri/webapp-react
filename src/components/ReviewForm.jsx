@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const ReviewForm = ({ book_id }) => {
-  const api_url = `${import.meta.env.VITE_API_URL}/${book_id}/reviews`;
+const ReviewForm = ({ movie_id }) => {
+  const api_url = `${import.meta.env.VITE_API_URL}/movies/${movie_id}/reviews`;
 
   const initialFormData = {
     text: "",
@@ -17,62 +17,47 @@ const ReviewForm = ({ book_id }) => {
   };
 
   const setFieldValue = (e) => {
-    const { value, name } = e.target;
-    console.log(e.target);
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
   return (
-    <div className="card my-3">
-      <header className="card-header">
-        <h1>Aggiungi una recensione</h1>
-      </header>
-      <div className="card-body">
-        <form action="#">
-          <div className="form-group">
-            <label>Nome:</label>
-            <input
-              className="form-control my-3"
-              name="name"
-              type="text"
-              placeholder="Inserisci nome..."
-              value={formData.name}
-              onChange={setFieldValue}
-            />
-          </div>
-          <div className="form-group">
-            <label>Testo:</label>
-            <textarea
-              className="form-control my-3"
-              name="text"
-              type="text"
-              placeholder="Inserisci testo..."
-              value={formData.text}
-              onChange={setFieldValue}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label>Voto:</label>
-            <input
-              className="form-control my-3"
-              type="number"
-              name="vote"
-              min={1}
-              max={5}
-              value={formData.vote}
-              onChange={setFieldValue}
-            />
-          </div>
-          <div className="justify-content-end">
-            <button className="btn btn-success">Aggiungi Recensione</button>
-          </div>
-        </form>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={setFieldValue}
+        />
       </div>
-    </div>
+      <div>
+        <label htmlFor="text">Review:</label>
+        <textarea
+          id="text"
+          name="text"
+          value={formData.text}
+          onChange={setFieldValue}
+        />
+      </div>
+      <div>
+        <label htmlFor="vote">Vote:</label>
+        <input
+          type="number"
+          id="vote"
+          name="vote"
+          value={formData.vote}
+          onChange={setFieldValue}
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
+
+export default ReviewForm;

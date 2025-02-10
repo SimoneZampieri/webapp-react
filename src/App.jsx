@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import DefLayout from "./components/DefLayout";
 import { GlobalProvider } from "./context/GlobalContext";
 import MovieDetailPage from "./components/MovieDetailPage";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 //app function
 function App() {

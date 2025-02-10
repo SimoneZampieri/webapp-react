@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import renderReviews from "../components/ReviewCard";
+import ReviewCard from "./ReviewCard";
 
-//function
 const MovieDetailPage = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    console.log(movie);
+  }, [movie]);
 
   useEffect(() => {
     axios
@@ -35,7 +38,13 @@ const MovieDetailPage = () => {
         <p>{movie.description}</p>
       </div>
       <h3>Recensioni:</h3>
-      {reviews && reviews.length > 0 && renderReviews()}
+      {movie.reviews && movie.reviews.length > 0 ? (
+        movie.reviews.map((review) => (
+          <ReviewCard review={review} key={review.id} />
+        ))
+      ) : (
+        <p>Nessuna recensione disponibile</p>
+      )}
     </div>
   );
 };

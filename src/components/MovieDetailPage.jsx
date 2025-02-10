@@ -52,8 +52,8 @@ const MovieDetailPage = () => {
       <div>
         <ReviewForm movie_id={movie?.id} fetchMovie={setMovie} />
       </div>
-      <Link href="/">
-        <button className="btn btn-success">Torna ai Film</button>
+      <Link to={"/"} className="btn btn-warning mt-5">
+        Torna alla home
       </Link>
     </div>
   );

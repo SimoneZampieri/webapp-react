@@ -4,7 +4,7 @@ import { useState, useContext, createContext, useEffect } from "react";
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-  const apiUrl = "http://localhost:3000/movies";
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [movies, setMovies] = useState([]);
 
   const fetchMovies = () => {

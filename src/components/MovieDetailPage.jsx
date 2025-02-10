@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import StarsRating from "./StarRating";
 
+//function
 const MovieDetailPage = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
@@ -42,6 +44,9 @@ const MovieDetailPage = () => {
       ) : (
         <p>Nessuna recensione disponibile</p>
       )}
+      <div>
+        <StarsRating vote={movie.vote} />
+      </div>
     </div>
   );
 };

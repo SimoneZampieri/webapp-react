@@ -2,11 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 
 const ReviewForm = ({ movie_id, fetchMovie }) => {
-  const api_url = `${import.meta.env.VITE_API_URL}/movies/${movie_id}/reviews`;
+  const api_url = `${import.meta.env.VITE_API_URL}/${movie_id}/reviews`;
 
   const initialFormData = {
-    text: "",
     name: "",
+    text: "",
     vote: "",
   };
 
@@ -14,7 +14,7 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const isValid = () => {
-    if (!formData.name || !formData.text || !formData.vote) return false;
+    if (!formData.text || !formData.name || !formData.vote) return false;
     return true;
   };
 

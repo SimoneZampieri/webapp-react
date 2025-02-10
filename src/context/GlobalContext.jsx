@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useContext, createContext, useEffect } from "react";
+import ReviewCard from "../components/ReviewCard";
 
 const GlobalContext = createContext();
 
@@ -16,6 +17,12 @@ const GlobalProvider = ({ children }) => {
       .catch((error) => {
         console.log("Errore nel fetch dei dati", error);
       });
+  };
+
+  const renderReviews = () => {
+    return movie.reviews.map((movie) => (
+      <ReviewCard key={movie.id} review={movie} />
+    ));
   };
 
   useEffect(() => {

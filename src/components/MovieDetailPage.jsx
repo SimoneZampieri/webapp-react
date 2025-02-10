@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import StarsRating from "./StarRating";
+import renderReviews from "../components/ReviewCard";
 
 //function
 const MovieDetailPage = () => {
@@ -32,21 +32,10 @@ const MovieDetailPage = () => {
           alt={movie.title}
           className="img-fluid imgcont"
         />
+        <p>{movie.description}</p>
       </div>
-      <p>{movie.description}</p>
       <h3>Recensioni:</h3>
-      {movie.reviews && movie.reviews.length > 0 ? (
-        <ul>
-          {movie.reviews.map((review) => (
-            <li key={review.id}>{review.text}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Nessuna recensione disponibile</p>
-      )}
-      <div>
-        <StarsRating vote={movie.vote} />
-      </div>
+      {reviews && reviews.length > 0 && renderReviews()}
     </div>
   );
 };

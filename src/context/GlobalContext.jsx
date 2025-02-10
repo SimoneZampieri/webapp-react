@@ -7,6 +7,7 @@ const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [movies, setMovies] = useState([]);
+  const [currentMovie, setCurrentMovie] = useState();
 
   const fetchMovies = () => {
     axios
@@ -19,6 +20,18 @@ const GlobalProvider = ({ children }) => {
       });
   };
 
+  const fetchMovie = (movie_id) => {
+    const movieApi_url = `${import.meta.env.VITE_API_URL}/${movie_id}`;
+
+    axios
+      .get(movieApi_url)
+      .then((res) => {
+        setCurrentMovie(res.data);
+      })
+      .catch((error) => {
+        console.log("Errore nel caricamento film", error);
+      });
+  };
   const renderReviews = () => {
     return movie.reviews.map((movie) => (
       <ReviewCard key={movie.id} review={movie} />
@@ -32,6 +45,8 @@ const GlobalProvider = ({ children }) => {
   const value = {
     movies,
     fetchMovies,
+    fetchMovie,
+    currentMovie,
   };
 
   return (

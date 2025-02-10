@@ -4,53 +4,44 @@ import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Link } from "react-router-dom";
 import ReviewForm from "./ReviewForm";
+import { useGlobalContext } from "../context/GlobalContext";
 
 ////
 const MovieDetailPage = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const { currentMovie, fetchMovie } = useGlobalContext();
   const api_url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    console.log(movie);
-  }, [movie]);
-
-  useEffect(() => {
-    axios
-      .get(`${api_url}/${id}`)
-      .then((res) => {
-        setMovie(res.data);
-      })
-      .catch((error) => {
-        console.error("Errore nel caricamento dati", error);
-      });
+    fetchMovie(id);
+    console.log("ciao");
   }, [id]);
 
-  if (!movie) {
+  if (!currentMovie) {
     return <p>Ci vorrà solo un attimo...</p>;
   }
 
   return (
     <div>
-      <h1>{movie.title}</h1>
+      <h1>{currentMovie.title}</h1>
       <div className="container">
         <img
-          src={movie.image}
-          alt={movie.title}
+          src={currentMovie.image}
+          alt={currentMovie.title}
           className="img-fluid imgcont"
         />
-        <p>{movie.description}</p>
+        <p>{currentMovie.description}</p>
       </div>
       <h3>Recensioni:</h3>
-      {movie.reviews && movie.reviews.length > 0 ? (
-        movie.reviews.map((review) => (
+      {currentMovie.reviews && currentMovie.reviews.length > 0 ? (
+        currentMovie.reviews.map((review) => (
           <ReviewCard review={review} key={review.id} />
         ))
       ) : (
         <p>Nessuna recensione disponibile</p>
       )}
       <div>
-        <ReviewForm movie_id={movie?.id} fetchMovie={setMovie} />
+        <ReviewForm movie_id={currentMovie?.id} />
       </div>
       <Link to={"/"} className="btn btn-warning mt-5">
         Torna alla home

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { useGlobalContext } from "../context/GlobalContext";
 
-const ReviewForm = ({ movie_id, fetchMovie }) => {
+const ReviewForm = ({ movie_id }) => {
   const api_url = `${import.meta.env.VITE_API_URL}/${movie_id}/reviews`;
 
   const initialFormData = {
@@ -12,6 +13,7 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
 
   const [formData, setFormData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState("");
+  const { fetchMovie } = useGlobalContext();
 
   const isValid = () => {
     if (!formData.text || !formData.name || !formData.vote) return false;
@@ -50,8 +52,11 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name" className="form-control font-weight-bold">
+          Name:
+        </label>
         <input
+          className="form-control"
           type="text"
           id="name"
           name="name"
@@ -60,8 +65,11 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
         />
       </div>
       <div>
-        <label htmlFor="text">Review:</label>
+        <label htmlFor="text" className="form-control font-weight-bold">
+          Review:
+        </label>
         <textarea
+          className="form-control"
           id="text"
           name="text"
           value={formData.text}
@@ -69,8 +77,11 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
         />
       </div>
       <div>
-        <label htmlFor="vote">Vote:</label>
+        <label htmlFor="vote" className="form-control font-weight-bold">
+          Vote:
+        </label>
         <input
+          className="form-control"
           type="number"
           id="vote"
           name="vote"
@@ -78,8 +89,9 @@ const ReviewForm = ({ movie_id, fetchMovie }) => {
           onChange={setFieldValue}
         />
       </div>
-      {errorMessage && <p>{errorMessage}</p>}
-      <button type="submit">Submit</button>
+      <button type="submit" className="btn btn-success my-2">
+        Inserisci la recensione
+      </button>
     </form>
   );
 };

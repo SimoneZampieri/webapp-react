@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 
-const ReviewForm = ({ movie_id }) => {
+const ReviewForm = ({ movie_id, fetchMovie }) => {
   const api_url = `${import.meta.env.VITE_API_URL}/movies/${movie_id}/reviews`;
 
   const initialFormData = {
@@ -10,10 +11,32 @@ const ReviewForm = ({ movie_id }) => {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const isValid = () => {
+    if (!formData.name || !formData.text || !formData.vote) return false;
+    return true;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("invio");
+    if (!isValid()) {
+      setErrorMessage("Devi compilare tutti i campi!");
+      return;
+    }
+
+    axios
+      .post(api_url, formData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        setFormData(initialFormData);
+        fetchMovie(movie_id);
+      })
+      .catch((err) => {
+        console.error(err);
+        setErrorMessage("Errore durante l'invio della recensione");
+      });
   };
 
   const setFieldValue = (e) => {
@@ -55,6 +78,7 @@ const ReviewForm = ({ movie_id }) => {
           onChange={setFieldValue}
         />
       </div>
+      {errorMessage && <p>{errorMessage}</p>}
       <button type="submit">Submit</button>
     </form>
   );

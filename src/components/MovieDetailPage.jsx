@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 import { Link } from "react-router-dom";
-import Home from "./Home";
+import ReviewForm from "./ReviewForm";
 
+////
 const MovieDetailPage = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const api_url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     console.log(movie);
@@ -15,7 +17,7 @@ const MovieDetailPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/movies/${id}`)
+      .get(`${api_url}/${id}`)
       .then((res) => {
         setMovie(res.data);
       })
@@ -47,7 +49,10 @@ const MovieDetailPage = () => {
       ) : (
         <p>Nessuna recensione disponibile</p>
       )}
-      <Link href="/movies">
+      <div>
+        <ReviewForm movie_id={movie?.id} fetchMovie={setMovie} />
+      </div>
+      <Link href="/">
         <button className="btn btn-success">Torna ai Film</button>
       </Link>
     </div>

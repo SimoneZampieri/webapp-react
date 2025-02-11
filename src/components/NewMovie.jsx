@@ -1,4 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
+const api_url = import.meta.env.VITE_API_URL;
 
 const NewMovie = () => {
   const [formData, setFormData] = useState(initialData);
@@ -9,10 +12,7 @@ const NewMovie = () => {
     description: "",
   };
 
-  const handleSetValue = (e) => {};
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSetValue = (e) => {
     const { value, name } = e.target;
 
     if (name === "image") {
@@ -20,8 +20,25 @@ const NewMovie = () => {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+  };
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const dataToSend = new FormData();
+
+    for (let key in formData) {
+      dataToSend.append(key, formData[key]);
+    }
+
+    axios
+      .post(api_url, dataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(() => navigate("/"))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -79,3 +96,5 @@ const NewMovie = () => {
     </div>
   );
 };
+
+export default NewMovie;

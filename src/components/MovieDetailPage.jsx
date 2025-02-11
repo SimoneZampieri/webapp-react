@@ -30,7 +30,7 @@ const MovieDetailPage = () => {
           alt={currentMovie.title}
           className="img-fluid imgcont"
         />
-        <p>{currentMovie.description}</p>
+        <h4 className="my-3">{currentMovie.abstract}</h4>
       </div>
       <h3>Recensioni:</h3>
       {currentMovie.reviews && currentMovie.reviews.length > 0 ? (

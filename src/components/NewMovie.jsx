@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 const NewMovie = () => {
@@ -12,6 +12,7 @@ const NewMovie = () => {
   };
 
   const [formData, setFormData] = useState(initialData);
+  const navigate = useNavigate();
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
@@ -38,7 +39,7 @@ const NewMovie = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => Navigate("/"))
+      .then(() => navigate("/"))
       .catch((err) => console.log(err));
   };
 
@@ -49,7 +50,7 @@ const NewMovie = () => {
       </header>
 
       <section className="card-body">
-        <form action="#" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-group">Titolo:</label>
             <input

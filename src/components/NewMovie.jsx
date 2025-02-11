@@ -7,9 +7,10 @@ const NewMovie = () => {
   const [formData, setFormData] = useState(initialData);
 
   initialData = {
-    name: "",
+    title: "",
     image: null,
-    description: "",
+    genre: "",
+    abstract: "",
   };
 
   const handleSetValue = (e) => {
@@ -50,35 +51,35 @@ const NewMovie = () => {
       <section className="card-body">
         <form action="#" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="form-group">Nome</label>
+            <label className="form-group">Titolo:</label>
             <input
               type="text"
               name="titolo"
               className="form-control my-3"
               placeholder="Inserisci il titolo del film..."
-              value={formData.name}
+              value={formData.title}
               onChange={handleSetValue}
             />
           </div>
           <div className="form-group">
-            <label className="form-group">Nome</label>
+            <label className="form-group">Genere:</label>
             <input
               type="text"
               name="titolo"
               className="form-control my-3"
               placeholder="Inserisci il titolo del film..."
-              value={formData.name}
+              value={formData.genre}
               onChange={handleSetValue}
             />
           </div>
           <div className="form-group">
-            <label className="form-group">Nome</label>
+            <label className="form-group">Descrizione:</label>
             <input
               type="text"
               name="titolo"
               className="form-control my-3"
               placeholder="Inserisci il titolo del film..."
-              value={formData.name}
+              value={formData.abstract}
               onChange={handleSetValue}
             />
           </div>

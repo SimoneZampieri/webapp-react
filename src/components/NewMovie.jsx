@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-const api_url = import.meta.env.VITE_API_URL;
 
 const NewMovie = () => {
+  const api_url = import.meta.env.VITE_API_URL;
+
   const initialData = {
     title: "",
     image: null,

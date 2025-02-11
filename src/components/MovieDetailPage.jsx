@@ -14,7 +14,6 @@ const MovieDetailPage = () => {
 
   useEffect(() => {
     fetchMovie(id);
-    console.log("ciao");
   }, [id]);
 
   if (!currentMovie) {

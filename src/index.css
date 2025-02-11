@@ -6,3 +6,8 @@
 .review{
     border: 1px solid black;
 }
+
+.placeholder{
+    max-width: 300px;
+    height: 400px;
+}

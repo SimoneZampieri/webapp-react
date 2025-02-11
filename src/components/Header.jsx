@@ -17,11 +17,6 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/movies">
-                Movies
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/movies/create">
                 Aggiungi un film
               </Link>

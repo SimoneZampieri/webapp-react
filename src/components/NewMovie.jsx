@@ -4,14 +4,14 @@ import { Navigate } from "react-router-dom";
 const api_url = import.meta.env.VITE_API_URL;
 
 const NewMovie = () => {
-  const [formData, setFormData] = useState(initialData);
-
-  initialData = {
+  const initialData = {
     title: "",
     image: null,
     genre: "",
     abstract: "",
   };
+
+  const [formData, setFormData] = useState(initialData);
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
@@ -38,7 +38,7 @@ const NewMovie = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => navigate("/"))
+      .then(() => Navigate("/"))
       .catch((err) => console.log(err));
   };
 
@@ -54,7 +54,7 @@ const NewMovie = () => {
             <label className="form-group">Titolo:</label>
             <input
               type="text"
-              name="titolo"
+              name="title"
               className="form-control my-3"
               placeholder="Inserisci il titolo del film..."
               value={formData.title}
@@ -65,9 +65,9 @@ const NewMovie = () => {
             <label className="form-group">Genere:</label>
             <input
               type="text"
-              name="titolo"
+              name="genre"
               className="form-control my-3"
-              placeholder="Inserisci il titolo del film..."
+              placeholder="Inserisci il genere..."
               value={formData.genre}
               onChange={handleSetValue}
             />
@@ -76,9 +76,9 @@ const NewMovie = () => {
             <label className="form-group">Descrizione:</label>
             <input
               type="text"
-              name="titolo"
+              name="abstract"
               className="form-control my-3"
-              placeholder="Inserisci il titolo del film..."
+              placeholder="Inserisci la descrizione..."
               value={formData.abstract}
               onChange={handleSetValue}
             />
@@ -92,6 +92,9 @@ const NewMovie = () => {
               onChange={handleSetValue}
             />
           </div>
+          <button type="submit" className="btn btn-success">
+            Inserisci
+          </button>
         </form>
       </section>
     </div>

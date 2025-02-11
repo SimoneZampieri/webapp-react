@@ -13,11 +13,13 @@ const NewMovie = () => {
 
   const [formData, setFormData] = useState(initialData);
   const navigate = useNavigate();
+  const [placeHolder, setPlaceholder] = useState("/images.jpeg");
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
 
     if (name === "image") {
+      setPlaceholder(URL.createObjectURL(e.target.files[0]));
       setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -92,7 +94,9 @@ const NewMovie = () => {
               name="image"
               onChange={handleSetValue}
             />
+            <img src={placeHolder} alt="placeholder" className="placeholder" />
           </div>
+
           <button type="submit" className="btn btn-success">
             Inserisci
           </button>

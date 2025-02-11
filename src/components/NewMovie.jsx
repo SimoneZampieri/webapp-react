@@ -98,7 +98,7 @@ const NewMovie = () => {
             <img src={placeHolder} alt="placeholder" className="placeholder" />
           </div>
 
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success my-3">
             Inserisci
           </button>
         </form>

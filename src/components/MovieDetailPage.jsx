@@ -9,7 +9,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 ////
 const MovieDetailPage = () => {
   const { id } = useParams();
-  const { currentMovie, fetchMovie } = useGlobalContext();
+  const { currentMovie, fetchMovie, deleteMovie } = useGlobalContext();
   const api_url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -45,6 +45,11 @@ const MovieDetailPage = () => {
       <Link to={"/"} className="btn btn-warning mt-5">
         Torna alla home
       </Link>
+      <div className="d-flex justify-content-end">
+        <button className="btn btn-danger">
+          <i className="bi bi-trash"></i>
+        </button>
+      </div>
     </div>
   );
 };

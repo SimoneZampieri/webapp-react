@@ -54,6 +54,7 @@ const GlobalProvider = ({ children }) => {
     fetchMovies,
     fetchMovie,
     currentMovie,
+    deleteMovie,
   };
 
   return (

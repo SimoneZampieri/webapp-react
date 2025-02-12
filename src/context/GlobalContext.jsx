@@ -20,6 +20,13 @@ const GlobalProvider = ({ children }) => {
       });
   };
 
+  const deleteMovie = (id, cb) => {
+    axios
+      .delete(`${apiUrl}/${id}`)
+      .then((res) => cb())
+      .catch((err) => console.log(err));
+  };
+
   const fetchMovie = (movie_id) => {
     const movieApi_url = `${import.meta.env.VITE_API_URL}/${movie_id}`;
 

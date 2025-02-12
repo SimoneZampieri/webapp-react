@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const NewMovie = () => {
   const api_url = import.meta.env.VITE_API_URL;
 
   const initialData = {
     title: "",
+    director: "",
     image: null,
     genre: "",
     abstract: "",
@@ -15,6 +17,7 @@ const NewMovie = () => {
   const [formData, setFormData] = useState(initialData);
   const navigate = useNavigate();
   const [placeHolder, setPlaceholder] = useState("/images.jpeg");
+  const { fetchMovies } = useGlobalContext();
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
@@ -42,7 +45,10 @@ const NewMovie = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => navigate("/"))
+      .then((res) => {
+        fetchMovies();
+        navigate("/");
+      })
       .catch((err) => console.log(err));
   };
 
@@ -62,6 +68,17 @@ const NewMovie = () => {
               className="form-control my-3"
               placeholder="Inserisci il titolo del film..."
               value={formData.title}
+              onChange={handleSetValue}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-group">Regista:</label>
+            <input
+              type="text"
+              name="director"
+              className="form-control my-3"
+              placeholder="Inserisci il regista..."
+              value={formData.director}
               onChange={handleSetValue}
             />
           </div>
@@ -98,7 +115,7 @@ const NewMovie = () => {
             <img src={placeHolder} alt="placeholder" className="placeholder" />
           </div>
 
-          <button type="submit" className="btn btn-success my-3">
+          <button type="submit" className="btn btn-success">
             Inserisci
           </button>
         </form>

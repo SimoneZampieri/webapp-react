@@ -5,12 +5,14 @@ import ReviewCard from "./ReviewCard";
 import { Link } from "react-router-dom";
 import ReviewForm from "./ReviewForm";
 import { useGlobalContext } from "../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 ////
 const MovieDetailPage = () => {
   const { id } = useParams();
   const { currentMovie, fetchMovie, deleteMovie } = useGlobalContext();
   const api_url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchMovie(id);
@@ -46,7 +48,14 @@ const MovieDetailPage = () => {
         Torna alla home
       </Link>
       <div className="d-flex justify-content-end">
-        <button className="btn btn-danger">
+        <button
+          className="btn btn-danger"
+          onClick={() => {
+            if (confirm("Sei sicuro di voler eliminare il film?")) {
+              deleteMovie(id, navigate("/"));
+            }
+          }}
+        >
           <i className="bi bi-trash"></i>
         </button>
       </div>

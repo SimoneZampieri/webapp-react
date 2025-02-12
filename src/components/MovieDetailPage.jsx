@@ -16,16 +16,6 @@ const MovieDetailPage = () => {
     fetchMovie(id);
   }, [id]);
 
-  const handleDelete = () => {
-    deleteMovie(id)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error("Error deleting movie:", err);
-      });
-  };
-
   if (!currentMovie) {
     return <p>Ci vorrà solo un attimo...</p>;
   }
@@ -56,7 +46,7 @@ const MovieDetailPage = () => {
         Torna alla home
       </Link>
       <div className="d-flex justify-content-end">
-        <button className="btn btn-danger" onClick={handleDelete}>
+        <button className="btn btn-danger">
           <i className="bi bi-trash"></i>
         </button>
       </div>
